@@ -1,0 +1,86 @@
+{% extends '_layouts/cp' %}
+
+{% import '_includes/forms' as forms %}
+
+{% set title = "Instagram" %}
+
+{% set crumbs = [
+	{ label: "Settings"|t, url: url('settings') },
+	{ label: "Plugins"|t, url: url('settings/plugins') },
+] %}
+
+{% css %}
+	.btn {
+		font-family: inherit;
+		line-height: inherit;
+	}
+{% endcss %}
+
+{% block contextMenu %}
+	{% if craft.app.getIsMultiSite() %}
+		{% include "_elements/sitemenu" with {
+			urlFormat: "instagram/{handle}",
+			selectedSiteId: siteId,
+		} %}
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<form method="post">
+		{{ csrfInput() }}
+		{{ hiddenInput('siteId', siteId) }}
+		{{ hiddenInput('tokenId', user.id ?? null) }}
+
+		{{ forms.autosuggestField({
+			label: 'appIdLabel'|t('instagram'),
+			id: "client-id",
+			name: "clientId",
+			instructions: 'appIdInstructions'|t('instagram'),
+			first: true,
+			class: "code",
+			required: true,
+			suggestEnvVars: true,
+			value: user.clientId ?? null,
+			errors: user.getErrors('clientId') ?? null,
+		}) }}
+
+		{{ forms.autosuggestField({
+			label: 'clientSecretLabel'|t('instagram'),
+			id: "client-secret",
+			name: "clientSecret",
+			instructions: 'clientSecretInstructions'|t('instagram'),
+			class: "code",
+			required: true,
+			suggestEnvVars: true,
+			value: user.clientSecret ?? null,
+			errors: user.getErrors('clientSecret') ?? null,
+		}) }}
+
+		{{ forms.textField({
+			label: 'redirectUrlLabel'|t('instagram'),
+			instructions: 'redirectUrlInstructions'|t('instagram'),
+			value: redirectUrl,
+			readonly: true,
+		}) }}
+
+{#		{% if user and user.expiryDate %}#}
+{#			<p>Token Expiry date {{ user.expiryDate }}</p>#}
+{#		{% endif %}#}
+
+		<div class="flex">
+			{% if not user or not user.token %}
+				<button class="btn submit" type="submit" name="action" value="instagram/tokens/authenticate-user">{{ 'Authenticate'|t('instagram') }}</button>
+			{% endif %}
+
+			{% if user and user.token %}
+				{% if craft.app.user.checkPermission('instagram-refreshToken') %}
+					<button class="btn" type="submit" name="action" value="instagram/tokens/refresh">{{ 'Refresh'|t('instagram') }}</button>
+				{% endif %}
+
+				{% if craft.app.user.checkPermission('instagram-deleteToken') %}
+					<button class="btn submit" type="submit" name="action" value="instagram/tokens/delete">{{ 'Delete'|t('instagram') }}</button>
+				{% endif %}
+			{% endif %}
+		</div>
+	</form>
+{% endblock %}

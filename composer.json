@@ -1,0 +1,26 @@
+{
+  "name": "nixon/craft-instagram",
+  "description": "Instagram Basic API integration for Craft CMS",
+  "version": "1.0.0",
+  "type": "craft-plugin",
+  "license": "MIT",
+  "keywords": [
+    "cms",
+    "craftcms",
+    "instagram",
+    "yii2"
+  ],
+  "require": {
+    "craftcms/cms": "^3.4.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "nixon\\instagram\\": "src/"
+    }
+  },
+  "extra": {
+    "name": "Instagram",
+    "handle": "instagram",
+    "documentationUrl": "https://github.com/craftcms/aws-s3/blob/master/README.md"
+  }
+}
