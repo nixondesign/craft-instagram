@@ -20,10 +20,12 @@ Fetching the users can be handled in two ways, via Twig or using JSON returned f
 
 ### Twig
 
-A users media can be displayed using the `getFeed()` method.
+A users media can be displayed using the `getMedia()` method. This method accepts an optional [options](#options) parameter.
 
 ```twig
-{% set feed = craft.instagram.getFeed() %}
+{% set feed = craft.instagram.getMedia({
+  limit: 20
+}) %}
 
 {% if feed %}
   {% for media in feed.media %}
@@ -47,12 +49,16 @@ A users media can be displayed using the `getFeed()` method.
 | getUrl()     | Either the mediaUrl or thumbnailUrl depending on media type  |
 | getImg()     | Returns an image element                                     |
 
+#### Paging
+
+In addition to the `media` property, `getMedia` also returns `before` and `after` properties for [pagination](#pagination).
+
 ### JSON
 
-The media feed is available as JSON via the `instagram/feeds/get-media` action URL. Options can be passed as query parameters.
+The media feed is available as JSON via the `instagram/media/fetch` action URL. [Options](#options) can be passed as query parameters.
 
 ```
-instagram/feeds/get-media?limit=1
+instagram/media/fetch?limit=1
 ```
 
 ```json
@@ -78,11 +84,11 @@ instagram/feeds/get-media?limit=1
 
 Pagination can be implemented by using the `before` and `after` properties sent along with the `media` property.
 
-```
+```json
 {
   "media": [],
   "before": "",
-  "after": "",
+  "after": ""
 }
 ```
 
@@ -91,7 +97,7 @@ These can be then sent as options with the next request.
 **Twig**
 
 ```twig
-craft.instagram.getFeed({
+craft.instagram.getMedia({
   after: "xxxxxxxxxxxxxxxxxxx"
 })
 ```
@@ -99,16 +105,16 @@ craft.instagram.getFeed({
 **Action URL**
 
 ```
-instagram/feeds/get-media?after=xxxxxxxxxxxxxxxxxxx
+instagram/media/fetch?after=xxxxxxxxxxxxxxxxxxx
 ```
 
 ### Options
 
 Both the Twig Variable and JSON endpoint accept the following options:
 
-| Option | Description                               | Default |
-| :----- | :---------------------------------------- | :------ |
-| after  |
-| before |
-| cache  | The duration to cache data for in seconds                            | 300  |
-| limit  | The number of media items to fetch, if null uses Instagram's default | null |
+| Option | Description                                                            | Default |
+| :----- | :--------------------------------------------------------------------- | :------ |
+| after  | Unique marker which to fetch media after                               | null    |
+| before | Unique marker which to fetch media before                              | null    |
+| cache  | The duration to cache data for in seconds, set to false for no caching | 300     |
+| limit  | The number of media items to fetch, if null uses Instagram's default   | null    |
