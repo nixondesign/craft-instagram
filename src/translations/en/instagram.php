@@ -12,4 +12,7 @@ return [
     'removePermissionLabel' => 'Remove tokens',
     'refreshPermissionLabel' => 'Refresh tokens',
     'feedDataCacheLabel' => 'Instagram feed data',
+    'deleteButton' => 'Delete',
+    'refreshButton' => 'Refresh',
+    'authenticateButton' => 'Authenticate',
 ];

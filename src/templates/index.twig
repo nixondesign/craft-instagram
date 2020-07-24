@@ -69,16 +69,16 @@
 
 		<div class="flex">
 			{% if not user or not user.token %}
-				<button class="btn submit" type="submit" name="action" value="instagram/tokens/authenticate-user">{{ 'Authenticate'|t('instagram') }}</button>
+				<button class="btn submit" type="submit" name="action" value="instagram/tokens/authenticate-user">{{ 'authenticateButton'|t('instagram') }}</button>
 			{% endif %}
 
 			{% if user and user.token %}
 				{% if craft.app.user.checkPermission('instagram-refreshToken') %}
-					<button class="btn" type="submit" name="action" value="instagram/tokens/refresh">{{ 'Refresh'|t('instagram') }}</button>
+					<button class="btn" type="submit" name="action" value="instagram/tokens/refresh">{{ 'refreshButton'|t('instagram') }}</button>
 				{% endif %}
 
 				{% if craft.app.user.checkPermission('instagram-deleteToken') %}
-					<button class="btn submit" type="submit" name="action" value="instagram/tokens/delete">{{ 'Delete'|t('instagram') }}</button>
+					<button class="btn submit" type="submit" name="action" value="instagram/tokens/delete">{{ 'deleteButton'|t('instagram') }}</button>
 				{% endif %}
 			{% endif %}
 		</div>
