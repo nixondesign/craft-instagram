@@ -63,10 +63,6 @@
 			readonly: true,
 		}) }}
 
-{#		{% if user and user.expiryDate %}#}
-{#			<p>Token Expiry date {{ user.expiryDate }}</p>#}
-{#		{% endif %}#}
-
 		<div class="flex">
 			{% if not user or not user.token %}
 				<button class="btn submit" type="submit" name="action" value="instagram/tokens/authenticate-user">{{ 'authenticateButton'|t('instagram') }}</button>
@@ -82,5 +78,11 @@
 				{% endif %}
 			{% endif %}
 		</div>
+
+        <hr>
+
+        {% if user and user.expiryDate %}
+            <p>{{ 'tokenExpiryText'|t('instagram', { date: user.expiryDate|datetime}) }}</p>
+        {% endif %}
 	</form>
 {% endblock %}

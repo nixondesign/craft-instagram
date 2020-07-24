@@ -15,4 +15,5 @@ return [
     'deleteButton' => 'Delete',
     'refreshButton' => 'Refresh',
     'authenticateButton' => 'Authenticate',
+    'tokenExpiryText' => 'Token expiry date {date}',
 ];
