@@ -3,7 +3,7 @@
 namespace nixon\instagram\services;
 
 use nixon\instagram\Plugin;
-use nixon\instagram\models\Media;
+use nixon\instagram\models\Media as MediaModel;
 
 use Craft;
 use GuzzleHttp\Exception\RequestException;
@@ -16,7 +16,7 @@ use yii\caching\TagDependency;
  * @author Nixon Design Ltd
  * @since 1.0
  */
-class Feeds extends Component
+class Media extends Component
 {
     const CACHE_TAG = 'instagram';
 
@@ -55,7 +55,7 @@ class Feeds extends Component
      * @param array $options
      * @return array|null
      */
-    public function getMediaFeed(array $options = [])
+    public function getMedia(array $options = [])
     {
         if ($this->token === null) {
             return null;
@@ -116,7 +116,7 @@ class Feeds extends Component
         $mediaItems = [];
 
         foreach ($data['data'] as $media) {
-            $model = new Media([
+            $model = new MediaModel([
                 'caption' => $media['caption'],
                 'id' => $media['id'],
                 'mediaType' => $media['media_type'],

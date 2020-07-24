@@ -2,7 +2,7 @@
 
 namespace nixon\instagram;
 
-use nixon\instagram\services\Feeds;
+use nixon\instagram\services\Media;
 use nixon\instagram\services\Tokens;
 
 use Craft;
@@ -19,7 +19,7 @@ use yii\base\Event;
 /**
  * Instagram plugin
  *
- * @property Feeds $feeds The feeds service
+ * @property Media $media The media service
  * @property Tokens $tokens The tokens service
  *
  * @author Nixon Design Ltd
@@ -57,7 +57,7 @@ class Plugin extends \craft\base\Plugin
 
         $this->setComponents([
             'tokens' => Tokens::class,
-            'feeds' => Feeds::class,
+            'media' => Media::class,
         ]);
 
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
@@ -85,7 +85,7 @@ class Plugin extends \craft\base\Plugin
             $event->options[] = [
                 'key' => 'instagram',
                 'label' => Craft::t('instagram', 'feedDataCacheLabel'),
-                'action' => [$this->getFeeds(), 'invalidateCache'],
+                'action' => [$this->getMedia(), 'invalidateCache'],
             ];
         });
     }
@@ -109,13 +109,13 @@ class Plugin extends \craft\base\Plugin
     }
 
     /**
-     * Returns the feeds service.
+     * Returns the media service.
      *
-     * @return Feeds The feeds service.
+     * @return Media The media service.
      */
-    public function getFeeds()
+    public function getMedia()
     {
-        return $this->get('feeds');
+        return $this->get('media');
     }
 
     /**

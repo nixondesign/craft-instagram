@@ -13,8 +13,8 @@ class Variable
      * @param array $options
      * @return array|null
      */
-    public function getFeed(array $options = [])
+    public function getMedia(array $options = [])
     {
-        return Plugin::getInstance()->getFeeds()->getMediaFeed($options);
+        return Plugin::getInstance()->getMedia()->getMedia($options);
     }
 }

@@ -11,15 +11,15 @@ use craft\web\Controller;
  * @author Nixon Design Ltd
  * @since 1.0
  */
-class FeedsController extends Controller
+class MediaController extends Controller
 {
-    protected $allowAnonymous = ['get-media'];
+    protected $allowAnonymous = ['fetch'];
 
-    public function actionGetMedia()
+    public function actionFetch()
     {
         $request = Craft::$app->getRequest();
 
-        return $this->asJson(Plugin::getInstance()->getFeeds()->getMediaFeed([
+        return $this->asJson(Plugin::getInstance()->getMedia()->getMedia([
             'after' => $request->getParam('after'),
             'before' => $request->getParam('before'),
             'limit' => $request->getParam('limit'),
