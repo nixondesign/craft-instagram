@@ -73,7 +73,7 @@ class AuthController extends Controller
         ]);
 
         if (!$user->validate()) {
-            $session->setError('Unable to authenticate user');
+            $session->setError(Craft::t('instagram', 'Unable to authenticate user'));
             $urlManager->setRouteParams([ 'user' => $user ]);
 
             return null;
@@ -94,7 +94,7 @@ class AuthController extends Controller
 
         if (!$state || !$sessionState || $state !== $sessionState) {
             $session->remove('instagram');
-            $session->setError('Invalid OAuth State');
+            $session->setError(Craft::t('instagram', 'Invalid OAuth state'));
 
             return null;
         }
@@ -107,7 +107,7 @@ class AuthController extends Controller
 
         if ($token === null) {
             $session->remove('instagram');
-            $session->setError('Authentication unsuccessful');
+            $session->setError(Craft::t('instagram', 'Authentication unsuccessful'));
 
             return null;
         }
@@ -123,7 +123,7 @@ class AuthController extends Controller
         $user->save();
 
         $session->remove('instagram');
-        $session->setNotice('Authentication successful');
+        $session->setNotice(Craft::t('instagram', 'Authentication successful'));
 
         return $this->redirect('instagram');
     }
@@ -145,7 +145,7 @@ class AuthController extends Controller
 
         Plugin::getInstance()->getAuth()->deleteTokenById($tokenId);
 
-        $session->setNotice('Token deleted');
+        $session->setNotice(Craft::t('instagram', 'Token deleted'));
 
         return $this->redirectToPostedUrl();
     }
@@ -166,7 +166,7 @@ class AuthController extends Controller
 
         Plugin::getInstance()->getAuth()->refreshTokenById($tokenId);
 
-        $session->setNotice('Refreshed token requested');
+        $session->setNotice(Craft::t('instagram', 'Refreshed token requested'));
 
         return $this->redirectToPostedUrl();
     }
