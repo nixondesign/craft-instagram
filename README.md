@@ -21,7 +21,13 @@ Before you can authorise the plugin you must first set up a Facebook app, this i
 
 ### Refreshing Access Tokens
 
-This plugin uses [long-lived access tokens](https://developers.facebook.com/docs/instagram-basic-display-api/guides/long-lived-access-tokens) which are valid for 60 days. To avoid having to reauthorise every 60 days these tokens can be refreshed to increase their life by another 60 days. This can be done via the plugin using the `instagram/tokens/refresh` CLI command. This command should be run periodically via cron.
+This plugin uses [long-lived access tokens](https://developers.facebook.com/docs/instagram-basic-display-api/guides/long-lived-access-tokens) which are valid for 60 days. These tokens can be refreshed to increase their life by another 60 days using the `instagram/tokens/refresh` CLI command. This command could be run periodically via cron.
+
+```
+0 0 1 * * /craft instagram/tokens/refresh
+```
+
+Tokens can also be refreshed via the control panel.
 
 ## Displaying a users media
 
