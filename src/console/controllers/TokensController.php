@@ -8,6 +8,8 @@ use nixon\instagram\records\Token;
 use craft\console\Controller;
 
 /**
+ * Manages Instagram tokens.
+ *
  * @author Nixon Design Ltd
  * @since 1.0
  */
