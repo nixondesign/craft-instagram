@@ -1,18 +1,27 @@
 # Instagram
 
-This plugin provides access to the [Instagram Basic Display API](https://developers.facebook.com/docs/instagram-basic-display-api).
+This plugin provides easy access to the [Instagram Basic Display API](https://developers.facebook.com/docs/instagram-basic-display-api) for [Craft CMS](https://craftcms.com/).
+
+**Features:**
+
+- Twig & JSON: Feeds are accessible both in Twig and as JSON via action urls.
+- Multisite support: Apps are authenticated per site allowing per site media feeds.
+- Easy token management: Tokens can easily be refreshed via the control panel or CLI.
 
 ## Authorising Instagram
 
-In order to display an Instagram user's media you must first authorise the plugin to access a users Instagram account. Authorisation is handled on a per site basis, that is to say each site has one authorised user.
+Before you can authorise the plugin you must first set up a Facebook app, this is the app you'll be using to authorise users and make API calls. Once set up you will require the App ID and App Secret. To set up your app, follow steps 1 to 3 in the [offical getting started guide](https://developers.facebook.com/docs/instagram-basic-display-api/getting-started). When asked for your "Valid OAuth Redirect URIs", use the URL found in the plugin settings page. If using multisite you'll need to create test users for each account you want to authorise.
 
-Before you can authorise a user you must first set up an Instagram app, this is the app you'll be using to authorise users and make API calls. Once set up you will require the App ID and Secret.
+### Plugin Setup
 
-Enter the app ID and secret these into the authorisation form and submit. You'll then be asked to log in to your Instagram account and provide the necessary permissions. The Instagram account you log in to will be the account which to pull media from. Once you grant permissions you'll be redirected back to the plugins authorisation page where it will then request an access token from the Instagram API.
+1. First either make sure you are logged into the Instgram account you want to authenticate or are logged out completely.
+2. Navigate to the plugin settings page, if running Craft multisite switch to the appropriate site.
+3. Enter the App ID and App Secret, found under App Dashboard > Products > Instagram > Basic Display. These can be set to environment variables.
+4. Click "Authenticate" where you'll be taken to Instagram to authorise the plugin. Once authorised you will be redirected back to the plugin page.
 
 ### Refreshing Access Tokens
 
-This plugin uses [long-lived access tokens](https://developers.facebook.com/docs/instagram-basic-display-api/guides/long-lived-access-tokens) which are valid for 60 days. To avoid having to reauthorise every 60 days these tokens can be refreshed to increase their life by another 60 days. Access tokens can be refreshed via the plugin using the `instagram/tokens/refresh` CLI command. This command should be run periodically via a crontab.
+This plugin uses [long-lived access tokens](https://developers.facebook.com/docs/instagram-basic-display-api/guides/long-lived-access-tokens) which are valid for 60 days. To avoid having to reauthorise every 60 days these tokens can be refreshed to increase their life by another 60 days. This can be done via the plugin using the `instagram/tokens/refresh` CLI command. This command should be run periodically via cron.
 
 ## Displaying a users media
 
