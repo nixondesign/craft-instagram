@@ -79,9 +79,9 @@
 			{% endif %}
 		</div>
 
-        <hr>
-
         {% if user and user.expiryDate %}
+            <hr>
+
             <p>{{ 'tokenExpiryText'|t('instagram', { date: user.expiryDate|datetime}) }}</p>
         {% endif %}
 	</form>
