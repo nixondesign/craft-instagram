@@ -16,7 +16,7 @@ use craft\helpers\Json;
  * @author Nixon Design Ltd
  * @since 1.0
  */
-class Tokens extends Component
+class Auth extends Component
 {
     /**
      * Gets a short lived token and then immediately exchanges it for a long

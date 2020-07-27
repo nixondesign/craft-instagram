@@ -19,7 +19,7 @@ class TokensController extends Controller
     public function actionRefresh()
     {
         foreach (Token::find()->all() as $user) {
-            Plugin::getInstance()->getTokens()->refreshToken($user);
+            Plugin::getInstance()->getAuth()->refreshToken($user);
         }
     }
 }

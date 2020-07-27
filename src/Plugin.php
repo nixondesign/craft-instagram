@@ -2,8 +2,8 @@
 
 namespace nixon\instagram;
 
+use nixon\instagram\services\Auth;
 use nixon\instagram\services\Media;
-use nixon\instagram\services\Tokens;
 
 use Craft;
 use craft\events\RegisterCacheOptionsEvent;
@@ -19,8 +19,8 @@ use yii\base\Event;
 /**
  * Instagram plugin
  *
+ * @property Auth $auth The auth service
  * @property Media $media The media service
- * @property Tokens $tokens The tokens service
  *
  * @author Nixon Design Ltd
  * @since 1.0
@@ -56,15 +56,15 @@ class Plugin extends \craft\base\Plugin
         self::$devMode = Craft::$app->getConfig()->getGeneral()->devMode;
 
         $this->setComponents([
-            'tokens' => Tokens::class,
+            'auth' => Auth::class,
             'media' => Media::class,
         ]);
 
         Event::on(UrlManager::class, UrlManager::EVENT_REGISTER_CP_URL_RULES, function(RegisterUrlRulesEvent $event) {
-            $event->rules['instagram'] = ['route' => 'instagram/tokens'];
-            $event->rules['instagram/token'] = 'instagram/tokens/token';
-            $event->rules['instagram/<siteHandle:{handle}>'] = ['route' => 'instagram/tokens'];
-            $event->rules['instagram/auth'] = 'instagram/tokens/authenticate-user';
+            $event->rules['instagram'] = ['route' => 'instagram/auth'];
+            $event->rules['instagram/<siteHandle:{handle}>'] = ['route' => 'instagram/auth'];
+            $event->rules['instagram/auth'] = 'instagram/auth/authenticate';
+            $event->rules['instagram/oauth-redirect'] = 'instagram/auth/get-token';
         });
 
         Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, function(RegisterUserPermissionsEvent $event) {
@@ -97,7 +97,7 @@ class Plugin extends \craft\base\Plugin
      */
     public static function getOAuthRedirectUrl(): string
     {
-        return UrlHelper::cpUrl('instagram/token');
+        return UrlHelper::cpUrl('instagram/oauth-redirect');
     }
 
     /**
@@ -121,10 +121,10 @@ class Plugin extends \craft\base\Plugin
     /**
      * Returns the tokens service.
      *
-     * @return Tokens The tokens service.
+     * @return Auth The tokens service.
      */
-    public function getTokens()
+    public function getAuth()
     {
-        return $this->get('tokens');
+        return $this->get('auth');
     }
 }

@@ -44,7 +44,7 @@ class Media extends Component
 
         $siteId = Craft::$app->getSites()->getCurrentSite()->id;
 
-        $token = Plugin::getInstance()->getTokens()->getTokenBySiteId($siteId);
+        $token = Plugin::getInstance()->getAuth()->getTokenBySiteId($siteId);
 
         if ($token) {
             $this->token = $token->token;

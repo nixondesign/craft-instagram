@@ -16,7 +16,7 @@ use craft\web\Controller;
  * @author Nixon Design Ltd
  * @since 1.0
  */
-class TokensController extends Controller
+class AuthController extends Controller
 {
     /**
      * Displays the main settings page.
@@ -36,7 +36,7 @@ class TokensController extends Controller
         }
 
         if ($user === null) {
-            $user = Plugin::getInstance()->getTokens()->getAuthBySiteId($siteId);
+            $user = Plugin::getInstance()->getAuth()->getAuthBySiteId($siteId);
         }
 
         return $this->renderTemplate('instagram', [
@@ -46,10 +46,12 @@ class TokensController extends Controller
         ]);
     }
 
-    public function actionAuthenticateUser()
+    public function actionAuthenticate()
     {
-        $session = Craft::$app->getSession();
+        $this->requirePermission('instagram-auth');
+
         $request = Craft::$app->getRequest();
+        $session = Craft::$app->getSession();
         $urlManager = Craft::$app->getUrlManager();
 
         $session->remove('instagram');
@@ -81,7 +83,7 @@ class TokensController extends Controller
         return $this->redirect($user->getAuthUrl());
     }
 
-    public function actionToken()
+    public function actionGetToken()
     {
         $request = Craft::$app->getRequest();
         $session = Craft::$app->getSession();
@@ -97,7 +99,7 @@ class TokensController extends Controller
             return null;
         }
 
-        $token = Plugin::getInstance()->getTokens()->getToken([
+        $token = Plugin::getInstance()->getAuth()->getToken([
             'code' =>$code,
             'clientId' => $session->get('instagram')['clientId'],
             'clientSecret' => $session->get('instagram')['clientSecret'],
@@ -135,13 +137,13 @@ class TokensController extends Controller
     public function actionDelete()
     {
         $this->requirePostRequest();
-        $this->requirePermission('instagram:delete');
+        $this->requirePermission('instagram-delete');
 
         $session = Craft::$app->getSession();
 
         $tokenId = Craft::$app->getRequest()->getRequiredBodyParam('tokenId');
 
-        Plugin::getInstance()->getTokens()->deleteTokenById($tokenId);
+        Plugin::getInstance()->getAuth()->deleteTokenById($tokenId);
 
         $session->setNotice('Token deleted');
 
@@ -157,14 +159,14 @@ class TokensController extends Controller
     public function actionRefresh()
     {
         $this->requirePostRequest();
-        $this->requirePermission('instagram:refresh');
+        $this->requirePermission('instagram-refresh');
 
         $session = Craft::$app->getSession();
         $tokenId = Craft::$app->getRequest()->getRequiredBodyParam('tokenId');
 
-        Plugin::getInstance()->getTokens()->refreshTokenById($tokenId);
+        Plugin::getInstance()->getAuth()->refreshTokenById($tokenId);
 
-        $session->setNotice('Token refresh scheduled');
+        $session->setNotice('Refreshed token requested');
 
         return $this->redirectToPostedUrl();
     }

@@ -20,7 +20,7 @@ class RefreshTokens extends BaseJob
     public function execute($queue)
     {
         foreach (Token::find()->all() as $user) {
-            Plugin::getInstance()->getTokens()->refreshToken($user);
+            Plugin::getInstance()->getAuth()->refreshToken($user);
         }
     }
 
