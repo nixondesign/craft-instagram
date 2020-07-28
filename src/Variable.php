@@ -1,6 +1,6 @@
 <?php
 
-namespace nixon\instagram;
+namespace nixondesign\instagram;
 
 /**
  * @author Nixon Design Ltd

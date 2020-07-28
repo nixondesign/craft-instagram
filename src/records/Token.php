@@ -1,6 +1,6 @@
 <?php
 
-namespace nixon\instagram\records;
+namespace nixondesign\instagram\records;
 
 use craft\db\ActiveRecord;
 

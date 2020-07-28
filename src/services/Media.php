@@ -1,9 +1,9 @@
 <?php
 
-namespace nixon\instagram\services;
+namespace nixondesign\instagram\services;
 
-use nixon\instagram\Plugin;
-use nixon\instagram\models\Media as MediaModel;
+use nixondesign\instagram\Plugin;
+use nixondesign\instagram\models\Media as MediaModel;
 
 use Craft;
 use GuzzleHttp\Exception\RequestException;

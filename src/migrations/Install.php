@@ -1,6 +1,6 @@
 <?php
 
-namespace nixon\instagram\migrations;
+namespace nixondesign\instagram\migrations;
 
 use craft\db\Migration;
 

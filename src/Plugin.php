@@ -1,9 +1,9 @@
 <?php
 
-namespace nixon\instagram;
+namespace nixondesign\instagram;
 
-use nixon\instagram\services\Auth;
-use nixon\instagram\services\Media;
+use nixondesign\instagram\services\Auth;
+use nixondesign\instagram\services\Media;
 
 use Craft;
 use craft\events\RegisterCacheOptionsEvent;

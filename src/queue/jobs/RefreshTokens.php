@@ -1,9 +1,9 @@
 <?php
 
-namespace nixon\instagram\queue\jobs;
+namespace nixondesign\instagram\queue\jobs;
 
-use nixon\instagram\Plugin;
-use nixon\instagram\records\Token;
+use nixondesign\instagram\Plugin;
+use nixondesign\instagram\records\Token;
 
 use Craft;
 use craft\queue\BaseJob;

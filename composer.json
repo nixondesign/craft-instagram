@@ -1,5 +1,5 @@
 {
-  "name": "nixon/craft-instagram",
+  "name": "nixondesign/craft-instagram",
   "description": "Instagram Basic API integration for Craft CMS",
   "version": "1.0.0",
   "type": "craft-plugin",
@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "nixon\\instagram\\": "src/"
+      "nixondesign\\instagram\\": "src/"
     }
   },
   "extra": {

@@ -1,10 +1,10 @@
 <?php
 
-namespace nixon\instagram\services;
+namespace nixondesign\instagram\services;
 
-use nixon\instagram\Plugin;
-use nixon\instagram\models\Token as Model;
-use nixon\instagram\records\Token as Record;
+use nixondesign\instagram\Plugin;
+use nixondesign\instagram\models\Token as Model;
+use nixondesign\instagram\records\Token as Record;
 
 use Craft;
 use DateInterval;

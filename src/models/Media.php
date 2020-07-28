@@ -1,6 +1,6 @@
 <?php
 
-namespace nixon\instagram\models;
+namespace nixondesign\instagram\models;
 
 use craft\base\Model;
 use craft\helpers\Html;

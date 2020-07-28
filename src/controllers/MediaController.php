@@ -1,8 +1,8 @@
 <?php
 
-namespace nixon\instagram\controllers;
+namespace nixondesign\instagram\controllers;
 
-use nixon\instagram\Plugin;
+use nixondesign\instagram\Plugin;
 
 use Craft;
 use craft\web\Controller;

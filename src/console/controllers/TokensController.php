@@ -1,9 +1,9 @@
 <?php
 
-namespace nixon\instagram\console\controllers;
+namespace nixondesign\instagram\console\controllers;
 
-use nixon\instagram\Plugin;
-use nixon\instagram\records\Token;
+use nixondesign\instagram\Plugin;
+use nixondesign\instagram\records\Token;
 
 use craft\console\Controller;
 

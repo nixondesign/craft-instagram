@@ -1,8 +1,8 @@
 <?php
 
-namespace nixon\instagram\models;
+namespace nixondesign\instagram\models;
 
-use nixon\instagram\Plugin;
+use nixondesign\instagram\Plugin;
 
 use Craft;
 use craft\base\Model;
