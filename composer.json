@@ -1,7 +1,6 @@
 {
   "name": "nixondesign/craft-instagram",
   "description": "Instagram Basic API integration for Craft CMS",
-  "version": "1.0.0",
   "type": "craft-plugin",
   "license": "MIT",
   "keywords": [
