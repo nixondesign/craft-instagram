@@ -21,6 +21,6 @@
   "extra": {
     "name": "Instagram",
     "handle": "instagram",
-    "documentationUrl": "https://github.com/craftcms/aws-s3/blob/master/README.md"
+    "documentationUrl": "https://github.com/nixondesign/craft-instagram/blob/master/README.md"
   }
 }
