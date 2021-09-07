@@ -117,7 +117,7 @@ class Media extends Component
 
         foreach ($data['data'] as $media) {
             $model = new MediaModel([
-                'caption' => $media['caption'],
+                'caption' => $media['caption'] ?? '',
                 'id' => $media['id'],
                 'mediaType' => $media['media_type'],
                 'mediaUrl' => $media['media_url'],
