@@ -13,7 +13,7 @@ use craft\web\Controller;
  */
 class MediaController extends Controller
 {
-    protected $allowAnonymous = ['fetch'];
+    protected array|int|bool $allowAnonymous = ['fetch'];
 
     public function actionFetch()
     {

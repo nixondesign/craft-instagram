@@ -39,12 +39,12 @@ class Plugin extends \craft\base\Plugin
     /**
      * @inheritdoc
      */
-    public $hasCpSettings = true;
+    public bool $hasCpSettings = true;
 
     /**
      * @inheritdoc
      */
-    public $hasCpSection = true;
+    public bool $hasCpSection = true;
 
     /**
      * @inheritdoc
@@ -68,10 +68,13 @@ class Plugin extends \craft\base\Plugin
         });
 
         Event::on(UserPermissions::class, UserPermissions::EVENT_REGISTER_PERMISSIONS, function(RegisterUserPermissionsEvent $event) {
-            $event->permissions['Instagram'] = [
-                'instagram-auth' => [ 'label' => Craft::t('instagram', 'authorisePermissionLabel') ],
-                'instagram-removeToken' => [ 'label' => Craft::t('instagram', 'removePermissionLabel') ],
-                'instagram-refreshToken' => [ 'label' => Craft::t('instagram', 'refreshPermissionLabel') ],
+            $event->permissions[] = [
+                'heading' => Craft::t('instagram', 'Instagram'),
+                'permissions' => [
+                    'instagram-auth' => [ 'label' => Craft::t('instagram', 'authorisePermissionLabel') ],
+                    'instagram-removeToken' => [ 'label' => Craft::t('instagram', 'removePermissionLabel') ],
+                    'instagram-refreshToken' => [ 'label' => Craft::t('instagram', 'refreshPermissionLabel') ],
+                ],
             ];
         });
 
@@ -103,9 +106,9 @@ class Plugin extends \craft\base\Plugin
     /**
      * @inheritdoc
      */
-    public function getSettingsResponse()
+    public function getSettingsResponse(): mixed
     {
-        Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('instagram'));
+        return Craft::$app->getResponse()->redirect(UrlHelper::cpUrl('instagram'));
     }
 
     /**

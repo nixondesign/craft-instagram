@@ -17,7 +17,7 @@ class RefreshTokens extends BaseJob
     /**
      * @inheritdoc
      */
-    public function execute($queue)
+    public function execute($queue): void
     {
         foreach (Token::find()->all() as $user) {
             Plugin::getInstance()->getAuth()->refreshToken($user);
