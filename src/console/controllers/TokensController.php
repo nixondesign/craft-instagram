@@ -4,7 +4,7 @@ namespace nixondesign\instagram\console\controllers;
 
 use nixondesign\instagram\Plugin;
 use nixondesign\instagram\records\Token;
-
+use yii\console\ExitCode;
 use craft\console\Controller;
 
 /**
@@ -23,5 +23,7 @@ class TokensController extends Controller
         foreach (Token::find()->all() as $user) {
             Plugin::getInstance()->getAuth()->refreshToken($user);
         }
+
+        return ExitCode::OK;
     }
 }
